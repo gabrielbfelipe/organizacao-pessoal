@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entrar · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+
+    <style>
+      body {
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: linear-gradient(160deg, var(--paper) 0%, #efece4 100%);
+      }
+
+      [data-theme="dark"] body {
+        background: linear-gradient(160deg, #10141c 0%, #171d27 100%);
+      }
+
+      .entrada {
+        width: 100%;
+        max-width: 396px;
+      }
+
+      .entrada__marca {
+        text-align: center;
+        margin-bottom: 26px;
+      }
+
+      .entrada__cruz {
+        font-size: 2rem;
+        color: var(--gold-texto);
+        line-height: 1;
+      }
+
+      .entrada__nome {
+        font-family: var(--fonte-titulo);
+        font-size: 2.6rem;
+        font-weight: 600;
+        color: var(--titulo);
+        margin: 4px 0 2px;
+        letter-spacing: 0.01em;
+      }
+
+      .entrada__lema {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .entrada__card {
+        padding: 28px;
+      }
+
+      .entrada__faixa {
+        height: 3px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(
+          90deg,
+          var(--lit-roxo),
+          var(--lit-verde),
+          var(--gold),
+          var(--lit-vermelho)
+        );
+        margin-bottom: 24px;
+        opacity: 0.8;
+      }
+
+      .entrada__erro {
+        padding: 10px 13px;
+        border-radius: var(--radius-sm);
+        background: var(--danger-fraco);
+        border: 1px solid var(--danger);
+        color: var(--danger);
+        font-size: 0.85rem;
+      }
+
+      .entrada__pe {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="entrada">
+      <div class="entrada__marca">
+        <div class="entrada__cruz" aria-hidden="true">✝</div>
+        <h1 class="entrada__nome">Ordo</h1>
+        <p class="entrada__lema">Ordem para a vida, a igreja e os estudos.</p>
+      </div>
+
+      <div class="card entrada__card">
+        <div class="entrada__faixa" aria-hidden="true"></div>
+
+        <form class="pilha" id="form-login" novalidate>
+          <div class="campo">
+            <label class="campo__rotulo" for="email">E-mail</label>
+            <input
+              class="input"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="username"
+              required
+              autofocus
+            />
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="senha">Senha</label>
+            <input
+              class="input"
+              type="password"
+              id="senha"
+              name="senha"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" name="lembrar" checked />
+            <span>Manter a sessão neste computador</span>
+          </label>
+
+          <div class="entrada__erro oculto" id="erro" role="alert"></div>
+
+          <button class="btn btn--ouro btn--bloco" type="submit" id="enviar">
+            Entrar
+          </button>
+        </form>
+      </div>
+
+      <p class="entrada__pe">
+        As credenciais iniciais são as que você definiu no arquivo
+        <code>.env</code>.
+      </p>
+    </div>
+
+    <script type="module">
+      import { api } from "/js/core/api.js";
+      import { iniciar as iniciarTema } from "/js/core/tema.js";
+
+      iniciarTema();
+
+      const form = document.getElementById("form-login");
+      const botao = document.getElementById("enviar");
+      const caixaErro = document.getElementById("erro");
+
+      function mostrarErro(mensagem) {
+        caixaErro.textContent = mensagem;
+        caixaErro.classList.remove("oculto");
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        caixaErro.classList.add("oculto");
+        botao.disabled = true;
+        botao.textContent = "Entrando...";
+
+        try {
+          await api.post("/login", {
+            email: form.email.value.trim(),
+            senha: form.senha.value,
+            lembrar: form.lembrar.checked,
+          });
+          location.href = "/";
+        } catch (erro) {
+          // O 401 do login é uma resposta esperada, não sessão expirada.
+          mostrarErro(
+            erro.status === 401
+              ? "E-mail ou senha incorretos."
+              : erro.message || "Não foi possível entrar."
+          );
+          botao.disabled = false;
+          botao.textContent = "Entrar";
+        }
+      });
+    </script>
+  </body>
+</html>

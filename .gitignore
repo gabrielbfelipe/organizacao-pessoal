@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+
+# Ambiente e segredos
+backend/.env
+
+# Dados locais
+backend/uploads/
+backup_*.sql
+
+# Testes
+.pytest_cache/
+.coverage
+
+# Editores e SO
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

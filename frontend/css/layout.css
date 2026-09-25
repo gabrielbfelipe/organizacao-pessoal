@@ -1,0 +1,397 @@
+/* ════════════════════════════════════════════════════════════════════
+   Ordo — casca da aplicação
+
+   O HTML destes blocos é injetado por js/core/layout.js. Nenhuma página
+   repete a sidebar ou a topbar.
+   ══════════════════════════════════════════════════════════════════ */
+
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-largura) 1fr;
+  min-height: 100vh;
+}
+
+/* ─────────────────────────── Sidebar ─────────────────────────── */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  overflow-y: auto;
+}
+
+.sidebar__marca {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 22px 22px 18px;
+  color: #fff;
+}
+
+.sidebar__cruz {
+  font-size: 1.3rem;
+  color: var(--gold-texto);
+  line-height: 1;
+}
+
+.sidebar__nome {
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.sidebar__lema {
+  padding: 0 22px 20px;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sidebar-text);
+  opacity: 0.55;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+
+.sidebar__nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 12px;
+}
+
+.sidebar__grupo {
+  padding: 16px 10px 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--sidebar-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.sidebar__item:hover {
+  background: var(--sidebar-hover);
+  color: var(--sidebar-text-ativo);
+  text-decoration: none;
+}
+
+.sidebar__item[aria-current="page"] {
+  background: var(--sidebar-ativo);
+  color: var(--sidebar-text-ativo);
+  box-shadow: inset 2px 0 0 var(--gold);
+}
+
+.sidebar__item .icone {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.sidebar__pe {
+  padding: 14px 18px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sidebar__usuario {
+  min-width: 0;
+}
+
+.sidebar__usuario-nome {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__usuario-email {
+  font-size: 0.72rem;
+  opacity: 0.55;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__acao {
+  background: transparent;
+  border: 0;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  color: var(--sidebar-text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.sidebar__acao:hover {
+  background: var(--sidebar-hover);
+  color: #fff;
+}
+
+.sidebar__acao .icone {
+  width: 17px;
+  height: 17px;
+}
+
+/* ─────────────────────────── Área principal ─────────────────────────── */
+
+.principal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* A faixa assume a cor do tempo litúrgico vigente. */
+.faixa-liturgica {
+  height: var(--faixa-altura);
+  background: var(--muted);
+  flex-shrink: 0;
+  transition: background 400ms ease;
+}
+
+.topbar {
+  min-height: var(--topbar-altura);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px var(--gutter);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--titulo);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.topbar__sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.topbar__acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.topbar__menu {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.topbar__menu .icone {
+  width: 20px;
+  height: 20px;
+}
+
+/* Marcador da cor litúrgica ao lado do tempo, na topbar. */
+.liturgia-ponto {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--muted);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.conteudo {
+  flex: 1;
+  width: 100%;
+  max-width: var(--conteudo-max);
+  margin: 0 auto;
+  padding: var(--gutter);
+}
+
+/* ─────────────────────────── Grid do dashboard ─────────────────────────── */
+
+.grade-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+/* O card da escala atravessa a largura e fica sempre no topo. */
+.grade-dashboard__destaque {
+  grid-column: 1 / -1;
+}
+
+.grade-dashboard__duplo {
+  grid-column: span 2;
+}
+
+/* Os cards secundários têm alturas muito diferentes. Numa grade, a
+   linha inteira fica com a altura do mais alto e abre vãos enormes.
+   Colunas CSS empilham cada um logo abaixo do anterior. */
+.massa-dashboard {
+  column-count: 3;
+  column-gap: 18px;
+}
+
+.massa-dashboard > * {
+  break-inside: avoid;
+  margin-bottom: 18px;
+  /* Sem isto o Chrome ainda parte cards no fim da coluna. */
+  display: block;
+  width: 100%;
+}
+
+/* ─────────────────────────── Busca global ─────────────────────────── */
+
+.busca-atalho {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  min-width: 220px;
+  border: 1px solid var(--border-forte);
+  border-radius: var(--radius-sm);
+  background: var(--card-sutil);
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color var(--transicao);
+}
+
+.busca-atalho:hover {
+  border-color: var(--gold-texto);
+}
+
+.busca-atalho__tecla {
+  margin-left: auto;
+  padding: 1px 6px;
+  border: 1px solid var(--border-forte);
+  border-radius: 4px;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+}
+
+/* ─────────────────────────── Responsivo ─────────────────────────── */
+
+@media (max-width: 1100px) {
+  .grade-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .massa-dashboard {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 880px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 272px;
+    z-index: 150;
+    transform: translateX(-100%);
+    transition: transform var(--transicao);
+    box-shadow: var(--shadow-forte);
+  }
+
+  .app[data-menu="aberto"] .sidebar {
+    transform: none;
+  }
+
+  .app[data-menu="aberto"]::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 140;
+    background: var(--sobreposicao);
+  }
+
+  .topbar__menu {
+    display: grid;
+    place-items: center;
+  }
+
+  .busca-atalho {
+    min-width: 0;
+  }
+
+  .busca-atalho__texto,
+  .busca-atalho__tecla {
+    display: none;
+  }
+
+  .grade-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .grade-dashboard__duplo {
+    grid-column: auto;
+  }
+
+  .massa-dashboard {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --gutter: 16px;
+  }
+
+  .topbar__titulo {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    padding: 16px 17px;
+  }
+
+  .modal__corpo,
+  .modal__cabecalho,
+  .modal__pe {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+}

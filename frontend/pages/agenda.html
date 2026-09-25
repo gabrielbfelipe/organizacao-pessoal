@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agenda · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      /* ── FullCalendar vestido com o design system do Ordo ── */
+      #calendario {
+        --fc-border-color: var(--border);
+        --fc-page-bg-color: var(--card);
+        --fc-neutral-bg-color: var(--card-sutil);
+        --fc-today-bg-color: var(--gold-fraco);
+        --fc-list-event-hover-bg-color: var(--card-sutil);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .fc {
+        font-family: var(--fonte-ui);
+        font-size: 0.88rem;
+      }
+
+      .fc .fc-toolbar-title {
+        font-family: var(--fonte-titulo);
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--titulo);
+      }
+
+      .fc .fc-button {
+        background: transparent;
+        border: 1px solid var(--border-forte);
+        color: var(--text);
+        font-size: 0.82rem;
+        font-weight: 500;
+        padding: 5px 11px;
+        border-radius: var(--radius-sm);
+        text-transform: none;
+        box-shadow: none;
+        transition: all var(--transicao-rapida);
+      }
+
+      .fc .fc-button:hover {
+        background: var(--card-sutil);
+        border-color: var(--gold-texto);
+        color: var(--text);
+      }
+
+      .fc .fc-button-primary:not(:disabled).fc-button-active,
+      .fc .fc-button-primary:not(:disabled):active {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+
+      .fc .fc-button:focus {
+        box-shadow: 0 0 0 3px var(--gold-fraco);
+      }
+
+      .fc .fc-button-primary:disabled {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--muted);
+        opacity: 0.6;
+      }
+
+      .fc .fc-col-header-cell-cushion {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 9px 4px;
+      }
+
+      .fc .fc-daygrid-day-number {
+        color: var(--text);
+        font-size: 0.85rem;
+        padding: 6px 8px;
+      }
+
+      .fc .fc-day-today .fc-daygrid-day-number {
+        color: var(--gold-texto);
+        font-weight: 600;
+      }
+
+      .fc .fc-day-other .fc-daygrid-day-number {
+        opacity: 0.35;
+      }
+
+      .fc-event {
+        border-radius: 5px;
+        border: none;
+        padding: 1px 5px;
+        font-size: 0.78rem;
+        cursor: pointer;
+      }
+
+      .fc-event-title {
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .fc-event-time {
+        font-weight: 600;
+        opacity: 0.85;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Ocorrência remarcada de uma série: tracejada, para distinguir. */
+      .fc-event.remarcada {
+        outline: 1px dashed rgba(255, 255, 255, 0.7);
+        outline-offset: -3px;
+      }
+
+      .fc .fc-timegrid-slot-label-cushion,
+      .fc .fc-list-day-text,
+      .fc .fc-list-day-side-text {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .fc-theme-standard .fc-list-day-cushion {
+        background: var(--card-sutil);
+      }
+
+      .fc .fc-list-event td {
+        color: var(--text);
+      }
+
+      /* ── Filtros ── */
+      .filtros {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .filtros__rotulo {
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-right: 2px;
+      }
+
+      .chip__cor {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      /* ── Detalhe do evento no modal ── */
+      .detalhe__linha {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 7px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.9rem;
+      }
+
+      .detalhe__linha:last-child {
+        border-bottom: 0;
+      }
+
+      .detalhe__linha .icone {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+
+      .detalhe__rotulo {
+        color: var(--muted);
+        min-width: 92px;
+      }
+
+      @media (max-width: 720px) {
+        #calendario {
+          padding: 10px;
+        }
+        .fc .fc-toolbar {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script type="module" src="/js/pages/agenda.js"></script>
+  </body>
+</html>

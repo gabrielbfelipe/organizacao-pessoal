@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flashcards · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .revisao {
+        max-width: 620px;
+        margin: 0 auto;
+      }
+
+      .carta {
+        position: relative;
+        min-height: 260px;
+        display: grid;
+        place-items: center;
+        padding: 36px 28px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .carta__lado {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        white-space: pre-wrap;
+      }
+
+      .carta__frente {
+        font-family: var(--fonte-titulo);
+        font-size: 1.6rem;
+      }
+
+      .carta__dica {
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        right: 0;
+        font-size: 0.76rem;
+        color: var(--muted);
+      }
+
+      .carta__disciplina {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        font-size: 0.74rem;
+        font-weight: 500;
+      }
+
+      .botoes-dificuldade {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .botao-dificuldade {
+        padding: 13px 10px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-forte);
+        background: var(--card);
+        color: var(--text);
+        cursor: pointer;
+        transition: all var(--transicao-rapida);
+      }
+
+      .botao-dificuldade:hover {
+        transform: translateY(-2px);
+      }
+
+      .botao-dificuldade[data-dificuldade="dificil"]:hover {
+        border-color: var(--danger-texto);
+        color: var(--danger-texto);
+      }
+      .botao-dificuldade[data-dificuldade="medio"]:hover {
+        border-color: var(--gold-texto);
+        color: var(--gold-texto);
+      }
+      .botao-dificuldade[data-dificuldade="facil"]:hover {
+        border-color: var(--success);
+        color: var(--success);
+      }
+
+      .botao-dificuldade__rotulo {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .botao-dificuldade__tecla {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      .cartas-lista {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 12px;
+      }
+
+      .carta-item {
+        padding: 13px 14px;
+      }
+
+      .carta-item__frente {
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .carta-item__verso {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/js/pages/estudos-flashcards.js"></script>
+  </body>
+</html>

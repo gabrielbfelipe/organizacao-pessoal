@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quadro de avisos · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .quadro {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+
+      /* Post-it: o papel dá a cor, e o texto é sempre escuro para
+         continuar legível nos dois temas. */
+      .postit {
+        position: relative;
+        padding: 16px 17px 14px;
+        border-radius: var(--radius-sm);
+        background: var(--papel);
+        color: #2b2b2b;
+        box-shadow: var(--shadow-media);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        transition: transform var(--transicao), box-shadow var(--transicao);
+        min-height: 128px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .postit:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-forte);
+      }
+
+      .postit--fixado {
+        box-shadow: var(--shadow-media), 0 0 0 2px var(--gold);
+      }
+
+      /* Faixa de prioridade no topo do cartão. */
+      .postit::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 3px;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        background: var(--faixa-prioridade, transparent);
+      }
+
+      .postit[data-prioridade="alta"] {
+        --faixa-prioridade: #b22222;
+      }
+      .postit[data-prioridade="media"] {
+        --faixa-prioridade: #b8963e;
+      }
+      .postit[data-prioridade="baixa"] {
+        --faixa-prioridade: rgba(0, 0, 0, 0.18);
+      }
+
+      .postit--vencido {
+        opacity: 0.5;
+      }
+
+      .postit__titulo {
+        font-family: var(--fonte-titulo);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1b2a41;
+        margin: 4px 0 7px;
+        padding-right: 52px;
+        line-height: 1.25;
+      }
+
+      .postit__conteudo {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        white-space: pre-wrap;
+        word-break: break-word;
+        flex: 1;
+      }
+
+      .postit__rodape {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 9px;
+        border-top: 1px solid rgba(0, 0, 0, 0.09);
+        font-size: 0.74rem;
+        color: rgba(0, 0, 0, 0.55);
+      }
+
+      .postit__acoes {
+        position: absolute;
+        top: 10px;
+        right: 9px;
+        display: flex;
+        gap: 1px;
+        opacity: 0;
+        transition: opacity var(--transicao-rapida);
+      }
+
+      .postit:hover .postit__acoes,
+      .postit:focus-within .postit__acoes {
+        opacity: 1;
+      }
+
+      .postit__botao {
+        background: rgba(255, 255, 255, 0.6);
+        border: 0;
+        border-radius: 6px;
+        padding: 5px;
+        cursor: pointer;
+        color: #2b2b2b;
+        display: grid;
+        place-items: center;
+        transition: background var(--transicao-rapida);
+      }
+
+      .postit__botao:hover {
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .postit__botao .icone {
+        width: 15px;
+        height: 15px;
+      }
+
+      .postit__botao[aria-pressed="true"] {
+        background: #b8963e;
+        color: #fff;
+      }
+
+      /* Seletor de cor do formulário */
+      .cores {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+
+      .cores__opcao {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: transform var(--transicao-rapida);
+      }
+
+      .cores__opcao:hover {
+        transform: scale(1.08);
+      }
+
+      .cores__opcao[aria-pressed="true"] {
+        border-color: var(--ink);
+        box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--gold);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/js/pages/avisos.js"></script>
+  </body>
+</html>

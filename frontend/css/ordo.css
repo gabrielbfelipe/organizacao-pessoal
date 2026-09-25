@@ -1,0 +1,6 @@
+/* Ponto único de entrada do CSS. As paginas linkam so este arquivo,
+   para que a ordem de carga fique definida num lugar so. */
+@import url("variables.css");
+@import url("base.css");
+@import url("components.css");
+@import url("layout.css");

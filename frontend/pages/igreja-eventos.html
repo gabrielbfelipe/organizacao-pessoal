@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eventos e missas · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+    <style>
+      .evento {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .evento:last-child {
+        border-bottom: 0;
+      }
+
+      .evento__data {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        padding: 8px 0;
+        border-radius: var(--radius-sm);
+        background: var(--card-sutil);
+        border: 1px solid var(--border);
+        flex-shrink: 0;
+        line-height: 1.15;
+      }
+
+      .evento__dia {
+        font-family: var(--fonte-titulo);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--titulo);
+      }
+
+      .evento__mes {
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+
+      .evento__titulo {
+        font-family: var(--fonte-titulo);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--titulo);
+        margin: 0 0 3px;
+      }
+
+      .evento__meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .evento__descricao {
+        font-size: 0.86rem;
+        color: var(--muted);
+        margin: 7px 0 0;
+      }
+
+      .evento--passado {
+        opacity: 0.55;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/js/pages/igreja-eventos.js"></script>
+  </body>
+</html>

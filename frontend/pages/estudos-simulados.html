@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simulados · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .simulados {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+        gap: 14px;
+        align-items: start;
+      }
+
+      .simulado {
+        padding: 16px 17px;
+        cursor: pointer;
+        transition: border-color var(--transicao), transform var(--transicao-rapida);
+      }
+
+      .simulado:hover {
+        border-color: var(--gold-texto);
+        transform: translateY(-2px);
+      }
+
+      .simulado__titulo {
+        font-family: var(--fonte-titulo);
+        font-size: 1.18rem;
+        font-weight: 600;
+        color: var(--titulo);
+        margin: 0 0 3px;
+        line-height: 1.25;
+      }
+
+      .simulado__meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: 0 0 13px;
+      }
+
+      .simulado__nota {
+        font-family: var(--fonte-titulo);
+        font-size: 2.1rem;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--gold-texto);
+      }
+
+      .simulado__nota--bom {
+        color: var(--success);
+      }
+      .simulado__nota--ruim {
+        color: var(--danger-texto);
+      }
+
+      .simulado__fracao {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      /* ── Grade de lançamento ── */
+      .grade-questoes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+        gap: 8px;
+        max-height: 54vh;
+        overflow-y: auto;
+        padding: 3px;
+      }
+
+      .questao {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--card);
+      }
+
+      .questao--anulada {
+        opacity: 0.5;
+      }
+
+      .questao--acerto {
+        border-color: var(--success);
+        background: var(--success-fraco);
+      }
+
+      .questao--erro {
+        border-color: var(--danger-texto);
+        background: var(--danger-fraco);
+      }
+
+      .questao__numero {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--muted);
+        min-width: 22px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .questao__letra {
+        width: 44px;
+        padding: 3px 5px;
+        border: 1px solid var(--border-forte);
+        border-radius: 5px;
+        background: var(--card);
+        color: var(--text);
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .questao__letra:focus {
+        outline: none;
+        border-color: var(--gold-texto);
+        box-shadow: 0 0 0 2px var(--gold-fraco);
+      }
+
+      /* ── Resultado ── */
+      .resultado-geral {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .resultado-bloco {
+        text-align: center;
+        padding: 13px 10px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--card-sutil);
+      }
+
+      .resultado-bloco__valor {
+        font-family: var(--fonte-titulo);
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: var(--titulo);
+        line-height: 1;
+      }
+
+      .resultado-bloco__rotulo {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-top: 5px;
+      }
+
+      .barra-disciplina {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 9px 0;
+      }
+
+      .barra-disciplina__nome {
+        min-width: 150px;
+        font-size: 0.86rem;
+      }
+
+      .barra-disciplina__valor {
+        min-width: 86px;
+        text-align: right;
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ── Gráficos ── */
+      .grafico__tela {
+        position: relative;
+      }
+
+      .grafico__dados summary {
+        cursor: pointer;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+
+      .grafico__dados summary:hover {
+        color: var(--gold-texto);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script type="module" src="/js/pages/estudos-simulados.js"></script>
+  </body>
+</html>

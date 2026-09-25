@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metas · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .metas {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 14px;
+        align-items: start;
+      }
+
+      .meta {
+        padding: 16px 17px;
+      }
+
+      .meta--cumprida {
+        border-color: var(--success);
+      }
+
+      .meta__descricao {
+        font-family: var(--fonte-titulo);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--titulo);
+        margin: 0 0 3px;
+        line-height: 1.3;
+      }
+
+      .meta__periodo {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin: 0 0 13px;
+      }
+
+      .meta__numeros {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 7px;
+      }
+
+      .meta__horas {
+        font-family: var(--fonte-titulo);
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--titulo);
+      }
+
+      .meta__alvo {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .meta__rodape {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 13px;
+        padding-top: 11px;
+        border-top: 1px solid var(--border);
+      }
+
+      .meta--inativa {
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/js/pages/estudos-metas.js"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pomodoro · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .pomodoro {
+        max-width: 520px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .relogio {
+        font-family: var(--fonte-titulo);
+        font-size: 6rem;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--titulo);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+        margin: 22px 0 8px;
+      }
+
+      .relogio--descanso {
+        color: var(--success);
+      }
+
+      .fase {
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 22px;
+      }
+
+      .anel {
+        height: 5px;
+        border-radius: var(--radius-pill);
+        background: var(--border);
+        overflow: hidden;
+        margin-bottom: 26px;
+      }
+
+      .anel__preenchido {
+        height: 100%;
+        background: var(--gold);
+        transition: width 1s linear;
+      }
+
+      .relogio--descanso ~ .anel .anel__preenchido {
+        background: var(--success);
+      }
+
+      .controles {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .ciclos {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .ciclo {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid var(--border-forte);
+      }
+
+      .ciclo--feito {
+        background: var(--gold);
+        border-color: var(--gold-texto);
+      }
+
+      .historico {
+        margin-top: 28px;
+        text-align: left;
+      }
+
+      /* ── Gráficos ── */
+      .grafico__tela {
+        position: relative;
+      }
+
+      .grafico__dados summary {
+        cursor: pointer;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+
+      .grafico__dados summary:hover {
+        color: var(--gold-texto);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script type="module" src="/js/pages/estudos-pomodoro.js"></script>
+  </body>
+</html>

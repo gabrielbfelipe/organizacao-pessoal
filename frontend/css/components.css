@@ -1,0 +1,1068 @@
+/* ════════════════════════════════════════════════════════════════════
+   Ordo — componentes reutilizáveis
+
+   Tudo aqui é usado por mais de uma tela. Estilo específico de um
+   módulo fica no <style> da própria página.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────── Ícones ───────────────────────────
+   Tamanho base para todo SVG do lucide. Sem isto, um ícone fora de
+   botão herda o tamanho do viewBox e estoura o layout. Contextos que
+   precisam de outro tamanho sobrescrevem. */
+
+.icone {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  vertical-align: -0.18em;
+}
+
+/* ─────────────────────────── Card ─────────────────────────── */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 22px;
+}
+
+.card--destaque {
+  border-color: var(--gold-texto);
+  box-shadow: var(--shadow-media), inset 0 0 0 1px var(--gold-fraco);
+}
+
+.card--plano {
+  box-shadow: none;
+}
+
+.card__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.card__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--titulo);
+  margin: 0;
+}
+
+.card__rotulo {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+/* ─────────────────────────── Botões ─────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transicao), border-color var(--transicao),
+    transform var(--transicao-rapida), opacity var(--transicao);
+}
+
+.btn:hover {
+  background: #24374f;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--ouro {
+  background: var(--gold);
+  color: #221c0c;
+}
+
+.btn--ouro:hover {
+  background: var(--gold-claro);
+}
+
+.btn--contorno {
+  background: transparent;
+  border-color: var(--border-forte);
+  color: var(--text);
+}
+
+.btn--contorno:hover {
+  background: var(--card-sutil);
+  border-color: var(--gold-texto);
+}
+
+.btn--fantasma {
+  background: transparent;
+  color: var(--muted);
+}
+
+.btn--fantasma:hover {
+  background: var(--gold-fraco);
+  color: var(--text);
+}
+
+.btn--perigo {
+  background: var(--danger);
+}
+
+.btn--perigo:hover {
+  background: #8f1b1b;
+}
+
+.btn--pequeno {
+  padding: 5px 11px;
+  font-size: 0.82rem;
+}
+
+.btn--icone {
+  padding: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+}
+
+.btn--bloco {
+  width: 100%;
+}
+
+.btn .icone {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────── Formulários ─────────────────────────── */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo__rotulo {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.campo__rotulo--obrigatorio::after {
+  content: " *";
+  color: var(--danger);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--card);
+  border: 1px solid var(--border-forte);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--muted);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--gold-texto);
+  box-shadow: 0 0 0 3px var(--gold-fraco);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.select {
+  appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7568' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.campo--erro .input,
+.campo--erro .select,
+.campo--erro .textarea {
+  border-color: var(--danger);
+}
+
+.campo__erro {
+  font-size: 0.78rem;
+  color: var(--danger-texto);
+}
+
+.input-cor {
+  width: 46px;
+  height: 38px;
+  padding: 3px;
+  border: 1px solid var(--border-forte);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  cursor: pointer;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.checkbox input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ─────────────────────────── Badges e chips ─────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  background: var(--card-sutil);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.badge--ouro {
+  background: var(--gold-fraco);
+  border-color: var(--gold-texto);
+  color: var(--gold-texto);
+}
+
+.badge--sucesso {
+  background: var(--success-fraco);
+  border-color: var(--success);
+  color: var(--success-texto);
+}
+
+.badge--perigo {
+  background: var(--danger-fraco);
+  border-color: var(--danger);
+  color: var(--danger-texto);
+}
+
+.badge__ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-forte);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transicao-rapida);
+}
+
+.chip:hover {
+  border-color: var(--gold-texto);
+  color: var(--text);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+/* ─────────────────────────── Tabela ─────────────────────────── */
+
+.tabela-envolve {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabela th {
+  text-align: left;
+  padding: 11px 16px;
+  background: var(--card-sutil);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tabela td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.tabela tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabela tbody tr {
+  transition: background var(--transicao-rapida);
+}
+
+.tabela tbody tr:hover {
+  background: var(--card-sutil);
+}
+
+.tabela th[data-ordenavel] {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tabela th[data-ordenavel]:hover {
+  color: var(--gold-texto);
+}
+
+/* ─────────────────────────── Modal ─────────────────────────── */
+
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--sobreposicao);
+  backdrop-filter: blur(3px);
+  animation: aparecer var(--transicao) both;
+}
+
+.modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-forte);
+  animation: subir var(--transicao) both;
+}
+
+.modal--largo {
+  max-width: 880px;
+}
+
+.modal__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--titulo);
+  margin: 0;
+}
+
+.modal__corpo {
+  padding: 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal__pe {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─────────────────────────── Toast ─────────────────────────── */
+
+.toasts {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 13px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-media);
+  font-size: 0.88rem;
+  pointer-events: auto;
+  animation: entrar-lado var(--transicao) both;
+}
+
+.toast--saindo {
+  animation: sair-lado var(--transicao) both;
+}
+
+.toast--sucesso {
+  border-left-color: var(--success);
+}
+
+.toast--erro {
+  border-left-color: var(--danger);
+}
+
+.toast--aviso {
+  border-left-color: var(--gold-texto);
+}
+
+/* ─────────────────────────── Estado vazio ─────────────────────────── */
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 44px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.vazio__icone {
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+  stroke-width: 1.5;
+}
+
+.vazio__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  color: var(--titulo);
+  margin: 0;
+}
+
+.vazio__texto {
+  font-size: 0.88rem;
+  max-width: 34ch;
+  margin: 0;
+}
+
+/* ─────────────────────────── Barra de progresso ─────────────────────────── */
+
+.progresso {
+  height: 7px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progresso__preenchido {
+  height: 100%;
+  background: var(--gold);
+  border-radius: var(--radius-pill);
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progresso--sucesso .progresso__preenchido {
+  background: var(--success);
+}
+
+/* ─────────────────────────── Carregando ─────────────────────────── */
+
+.girando {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold-texto);
+  border-radius: 50%;
+  animation: girar 700ms linear infinite;
+}
+
+.carregando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.esqueleto {
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--card-sutil) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: brilhar 1.4s ease-in-out infinite;
+}
+
+/* ─────────────────────────── Animações ─────────────────────────── */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes entrar-lado {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sair-lado {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brilhar {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ─────────────────────────── Item de lista ───────────────────────────
+   Linha compacta com bloco de data à esquerda. Usada nos cards do
+   dashboard (escalas, compromissos, tarefas) e nas listas dos módulos. */
+
+.item-lista {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.item-lista:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.item-lista:first-child {
+  padding-top: 0;
+}
+
+.item-lista__data {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  padding: 5px 0;
+  border-radius: var(--radius-sm);
+  background: var(--card-sutil);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  line-height: 1.1;
+}
+
+.item-lista__dia {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--titulo);
+}
+
+.item-lista__mes {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* Amostra quadrada de cor, para cor litúrgica, categoria e disciplina. */
+.amostra-cor {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.amostra-cor--pequena {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────── Anotações (lista + leitura) ───────────────────────
+   Usado pelas telas de anotações da Igreja e dos Estudos. */
+
+.notas {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.notas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: calc(var(--topbar-altura) + 16px);
+}
+
+.notas-lista__itens {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 64vh;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.notas-lista__vazio {
+  padding: 22px 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.nota-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  cursor: pointer;
+  transition: border-color var(--transicao-rapida), background var(--transicao-rapida);
+}
+
+.nota-item:hover {
+  border-color: var(--gold-texto);
+}
+
+.nota-item--ativa {
+  background: var(--gold-fraco);
+  border-color: var(--gold-texto);
+}
+
+.nota-item__titulo {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.nota-item__pin {
+  width: 13px;
+  height: 13px;
+  color: var(--gold-texto);
+}
+
+.nota-item__meta {
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ─────────────────────── Markdown renderizado ─────────────────────── */
+
+.markdown {
+  line-height: 1.7;
+}
+
+.markdown > :first-child {
+  margin-top: 0;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  margin: 1.4em 0 0.5em;
+}
+
+.markdown h1 {
+  font-size: 1.6rem;
+}
+.markdown h2 {
+  font-size: 1.3rem;
+}
+.markdown h3 {
+  font-size: 1.1rem;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 1.4em;
+}
+
+.markdown li {
+  margin-bottom: 0.3em;
+}
+
+.markdown blockquote {
+  margin: 1em 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--gold);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.markdown code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--card-sutil);
+  border: 1px solid var(--border);
+}
+
+.markdown pre {
+  padding: 13px 15px;
+  border-radius: var(--radius-sm);
+  background: var(--card-sutil);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.markdown pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9rem;
+}
+
+.markdown th,
+.markdown td {
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.markdown th {
+  background: var(--card-sutil);
+}
+
+.markdown hr {
+  margin: 1.6em 0;
+}
+
+@media (max-width: 900px) {
+  .notas {
+    grid-template-columns: 1fr;
+  }
+  .notas-lista {
+    position: static;
+  }
+  .notas-lista__itens {
+    max-height: 240px;
+  }
+}
+
+/* ─────────────────────── Paleta de busca (Ctrl+K) ─────────────────────── */
+
+.paleta-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 14vh 20px 20px;
+  background: var(--sobreposicao);
+  backdrop-filter: blur(3px);
+  animation: aparecer var(--transicao-rapida) both;
+}
+
+.paleta {
+  width: 100%;
+  max-width: 620px;
+  max-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-forte);
+  overflow: hidden;
+  animation: subir var(--transicao) both;
+}
+
+.paleta__campo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.paleta__entrada {
+  flex: 1;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 1.02rem;
+  outline: none;
+  min-width: 0;
+}
+
+.paleta__entrada::placeholder {
+  color: var(--muted);
+}
+
+.paleta__resultados {
+  overflow-y: auto;
+  padding: 7px;
+}
+
+.paleta__grupo + .paleta__grupo {
+  margin-top: 4px;
+}
+
+.paleta__grupo-titulo {
+  padding: 8px 11px 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.paleta__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.paleta__item--ativo {
+  background: var(--gold-fraco);
+}
+
+.paleta__item-icone {
+  color: var(--muted);
+}
+
+.paleta__item--ativo .paleta__item-icone {
+  color: var(--gold-texto);
+}
+
+.paleta__item-texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.paleta__item-titulo {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paleta__item-trecho {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paleta__dica {
+  padding: 30px 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 560px) {
+  .paleta-fundo {
+    padding: 8vh 12px 12px;
+  }
+}
+
+/* Grade dos blocos de gráfico. */
+.graficos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+/* ─────────────────────── Entrada do conteúdo ───────────────────────
+   Uma subida curta ao trocar de tela: dá continuidade sem atrasar a
+   leitura. Escalonada nos primeiros cartões, e nada depois disso —
+   escalonar uma lista longa faria o último item chegar tarde demais.
+
+   Quem pediu menos movimento no sistema não vê nada disto: a regra
+   abaixo é anulada pelo prefers-reduced-motion. */
+
+.conteudo .card,
+.conteudo .postit,
+.conteudo .tarefa,
+.conteudo .grafico {
+  animation: entrar-conteudo 260ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.conteudo .card:nth-child(2),
+.conteudo .postit:nth-child(2),
+.conteudo .tarefa:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.conteudo .card:nth-child(3),
+.conteudo .postit:nth-child(3),
+.conteudo .tarefa:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+.conteudo .card:nth-child(n + 4),
+.conteudo .postit:nth-child(n + 4),
+.conteudo .tarefa:nth-child(n + 4) {
+  animation-delay: 110ms;
+}
+
+@keyframes entrar-conteudo {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Movimento é enfeite: quem pediu menos, não recebe nenhum. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

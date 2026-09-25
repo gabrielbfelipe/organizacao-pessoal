@@ -1,0 +1,147 @@
+/* ════════════════════════════════════════════════════════════════════
+   Ordo — tokens do design system
+
+   Conceito: elegante e sereno, com um toque clássico que não pesa.
+
+   O tema escuro vem por [data-theme="dark"], posto no <html> por
+   js/core/tema.js. As cores litúrgicas e as da marca não mudam entre os
+   temas: a faixa do tempo litúrgico precisa ser a mesma cor nos dois.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Marca (constante nos dois temas) ── */
+  --ink: #1b2a41;
+  --gold: #b8963e;
+  --gold-claro: #d4b86a;
+  --gold-fraco: rgba(184, 150, 62, 0.12);
+  /* Ouro para TEXTO. O --gold cheio dá 2,81:1 sobre o branco — abaixo do
+     mínimo mesmo em corpo grande. Este passo foi calculado para superar
+     4,5:1 sobre o card e sobre o fundo do badge. */
+  --gold-texto: #7a5f1f;
+
+  /* ── Superfícies ── */
+  --paper: #f7f5f0;
+  --card: #ffffff;
+  --card-sutil: #fbfaf7;
+  --sobreposicao: rgba(27, 42, 65, 0.45);
+
+  /* ── Texto ── */
+  --titulo: #1b2a41;
+  --text: #2b2b2b;
+  --muted: #706b5e;
+  --border: #e6e1d6;
+  --border-forte: #d5cec0;
+
+  /* ── Sidebar ── */
+  --sidebar-bg: #1b2a41;
+  --sidebar-text: #c2ccda;
+  --sidebar-text-ativo: #ffffff;
+  --sidebar-hover: rgba(255, 255, 255, 0.07);
+  --sidebar-ativo: rgba(184, 150, 62, 0.16);
+
+  /* ── Estados ── */
+  --success: #2e7d4f;
+  --success-fraco: rgba(46, 125, 79, 0.12);
+  --danger: #b22222;
+  --danger-fraco: rgba(178, 34, 34, 0.1);
+  /* Versões para TEXTO: as cores de preenchimento não alcançam 4,5:1
+     sobre o fundo translúcido dos próprios badges. */
+  --success-texto: #276a43;
+  --danger-texto: #b22222;
+  --warning: #b8963e;
+  --info: #4a6fa5;
+
+  /* ── Cores litúrgicas ── */
+  --lit-roxo: #6b3fa0;
+  --lit-verde: #2e7d4f;
+  --lit-branco: #e8e1cf;
+  --lit-vermelho: #b22222;
+  --lit-rosa: #d98ca6;
+
+  /* ── Gráficos ──
+     A série NÃO usa --gold: sobre o branco ele dá contraste 2,81, abaixo
+     do mínimo de 3:1. O tom escuro do tema claro foi validado à parte,
+     e o tema escuro tem o seu próprio passo — não é o claro invertido. */
+  --grafico-serie: #9a7b2c;
+  --grafico-serie-fraca: rgba(154, 123, 44, 0.12);
+  --grafico-grade: #e6e1d6;
+  --grafico-texto: #7a7568;
+  --grafico-superficie: #ffffff;
+
+  /* ── Forma ── */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --shadow: 0 4px 20px rgba(27, 42, 65, 0.06);
+  --shadow-media: 0 6px 24px rgba(27, 42, 65, 0.1);
+  --shadow-forte: 0 16px 48px rgba(27, 42, 65, 0.2);
+
+  /* ── Movimento ── */
+  --transicao: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transicao-rapida: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Tipografia ── */
+  --fonte-titulo: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  --fonte-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --fonte-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* ── Medidas ── */
+  --sidebar-largura: 248px;
+  --topbar-altura: 68px;
+  --faixa-altura: 4px;
+  --conteudo-max: 1360px;
+  --gutter: 24px;
+}
+
+[data-theme="dark"] {
+  --paper: #12161e;
+  --card: #1a202b;
+  --card-sutil: #1f2632;
+  --sobreposicao: rgba(0, 0, 0, 0.6);
+
+  --titulo: #e9e5db;
+  --text: #ddd9d0;
+  --muted: #968f81;
+  --border: #2b3340;
+  --border-forte: #3a4351;
+
+  --sidebar-bg: #0e131b;
+  --sidebar-text: #a6b0c0;
+  --sidebar-text-ativo: #ffffff;
+  --sidebar-hover: rgba(255, 255, 255, 0.05);
+  --sidebar-ativo: rgba(184, 150, 62, 0.2);
+
+  --gold: #c8a655;
+  --gold-fraco: rgba(200, 166, 85, 0.14);
+  --gold-texto: #c8a655;
+  --success: #4c9d6e;
+  --success-fraco: rgba(76, 157, 110, 0.15);
+  --danger: #d15353;
+  --danger-fraco: rgba(209, 83, 83, 0.15);
+  --success-texto: #6ab88a;
+  --danger-texto: #e88585;
+  --info: #6b8fc4;
+
+  /* O branco litúrgico precisa escurecer para não ofuscar no tema escuro,
+     mas continua legível como "branco" na faixa. */
+  --lit-branco: #cfc7b0;
+
+  /* Passos próprios do tema escuro, validados contra #1A202B. */
+  --grafico-serie: #c8a655;
+  --grafico-serie-fraca: rgba(200, 166, 85, 0.14);
+  --grafico-grade: #2b3340;
+  --grafico-texto: #968f81;
+  --grafico-superficie: #1a202b;
+
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-media: 0 6px 24px rgba(0, 0, 0, 0.4);
+  --shadow-forte: 0 16px 48px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transicao: 0ms;
+    --transicao-rapida: 0ms;
+  }
+}

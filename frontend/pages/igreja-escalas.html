@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Escala de cerimoniário · Ordo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/ordo.css" />
+
+    <script>
+      try {
+        const t = localStorage.getItem("ordo:tema");
+        document.documentElement.setAttribute(
+          "data-theme",
+          t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        );
+      } catch {}
+    </script>
+
+    <style>
+      .mes-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .mes-nav__rotulo {
+        font-family: var(--fonte-titulo);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--titulo);
+        min-width: 150px;
+        text-align: center;
+      }
+
+      .contadores {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .contador {
+        padding: 14px 16px;
+      }
+
+      .contador__valor {
+        font-family: var(--fonte-titulo);
+        font-size: 1.9rem;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--titulo);
+      }
+
+      .contador__rotulo {
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 5px;
+      }
+
+      /* Marca a coluna de data com a faixa da cor do status. */
+      .col-data {
+        border-left: 3px solid var(--border);
+        font-variant-numeric: tabular-nums;
+      }
+
+      tr[data-status="confirmada"] .col-data {
+        border-left-color: var(--success);
+      }
+      tr[data-status="pendente"] .col-data {
+        border-left-color: var(--gold-texto);
+      }
+      tr[data-status="troca_solicitada"] .col-data {
+        border-left-color: var(--danger-texto);
+      }
+
+      tr[data-passada="sim"] {
+        opacity: 0.55;
+      }
+
+      .col-acoes {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .obs {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 3px;
+        display: flex;
+        gap: 5px;
+        align-items: flex-start;
+      }
+
+      .obs .icone {
+        width: 13px;
+        height: 13px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+
+      /* ── Cadastro em lote ── */
+      .lote-linha {
+        display: grid;
+        grid-template-columns: 1.1fr 0.7fr 1.6fr 1.3fr 34px;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .lote-cabecalho {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .lote-linhas {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 46vh;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+
+      @media (max-width: 720px) {
+        .lote-linha {
+          grid-template-columns: 1fr 1fr;
+        }
+        .lote-cabecalho {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carregando"><span class="girando"></span>Carregando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/js/pages/igreja-escalas.js"></script>
+  </body>
+</html>
